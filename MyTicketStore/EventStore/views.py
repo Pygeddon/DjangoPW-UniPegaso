@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from EventManager.models import Event, EventDates,Order, EventTags
 from django.contrib.auth.decorators import login_required
 import logging
@@ -116,7 +116,7 @@ def EventStoreShopCart(request):
         else:
             return render(request, 'eventstore_home.html')
     else:
-        return render(request, 'eventstore_home.html')
+        return HttpResponseRedirect('eventstore_home.html')
     
 #Pagina che mostra il dettaglio degli ordini effettuati dall'utente corrente del sito.
 def EventStoreUserOrders(request):

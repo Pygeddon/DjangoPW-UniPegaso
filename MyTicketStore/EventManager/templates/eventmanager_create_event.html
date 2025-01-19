@@ -2,89 +2,88 @@
 {% load crispy_forms_tags %}
 {% block title %} Crea Evento {% endblock %}
 {% block content %}
-<h1>Event Manager Create new Event</h1>
-{% if form.success %}
-<div class="alert alert-success" role="alert">
-    {{ form.success }}
-</div>
-{% endif %}
-{% if form.errors %}
-<div class="alert alert-danger" role="alert">
-    {{ form.errors }}
-</div>
-{% endif %}
-<form class="row g-3" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="col-md-6 input-group" style="width: 40rem;">
-        <span class="input-group-text" id="nome">Nome:</span>
-        <input type="text" class="form-control" id="name" name="name" required>
+<h1>Event Manager - Crea Evento
+    <div class="alert alert-success" role="alert">
+        {{ form.success }}
     </div>
-    <div class="col-md-6 input-group" style="width: 40rem;">
-        <span class="input-group-text" id="location">Luogo dell'evento:</span>
-        <input type="text" class="form-control" id="location" name="location" required>
+    {% endif %}
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ form.errors }}
     </div>
-    <div class="col-md-4 input-group" style="width: 18rem;">
-        <span class="input-group-text" id="fromdata">Data inizio:</span>
-        <input type="date" class="form-control" id="datepicker_from" name="from_date" required>
-    </div>
-    <div class="col-md-4 input-group" style="width: 18rem;">
-        <span class="input-group-text" id="todata">Data fine:</span>
-        <input type="date" class="form-control" id="datepicker_to" name="to_date" required>
-    </div>
-    <div class="col-12 input-group">
-        <span class="input-group-text" id="descrizione">Descrizione:</span>
-        <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
-    </div>
-    <div class="col-md-4 input-group " style="width: 25rem;">
-        <span class="input-group-text" id="intero">Costo ticket intero:</span>
-        <input type="number" class="form-control" id="ticket_Intero_cost" name="ticket_Intero_cost" step="0.01"
-            required>
-    </div>
-    <div class="col-md-4 input-group " style="width: 25rem;">
-        <span class="input-group-text" id="ridotto">Costo ticket ridotto:</span>
-        <input type="number" class="form-control" id="ticket_Ridotto_cost" name="ticket_Ridotto_cost" step="0.01"
-            required>
-    </div>
-    <div class="col-md-4 input-group " style="width: 25rem;">
-        <span class="input-group-text" id="gruppi">Costo ticket gruppi:</span>
-        <input type="number" class="form-control" id="ticket_Gruppo_cost" name="ticket_Gruppo_cost" step="0.01"
-            required>
-    </div>
-    <div class="col-12">
-        <label for=image class="form-label">Immagine copertina evento</label>
-        <input type="file" class="form-control" id="image" name="image" required>
-    </div>
-    <div class="col-md-4 input-group " style="width: 25rem;">
-        <span class="input-group-text" id="Biglietti disponibili">Biglietti disponibili:</span>
-        <input type="number" class="form-control" id="ticket_available" name="ticket_available" required>
-    </div>
+    {% endif %}
+    <form class="row g-3" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-md-6 input-group" style="width: 40rem;">
+            <span class="input-group-text" id="nome">Nome:</span>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="col-md-6 input-group" style="width: 40rem;">
+            <span class="input-group-text" id="location">Luogo dell'evento:</span>
+            <input type="text" class="form-control" id="location" name="location" required>
+        </div>
+        <div class="col-md-4 input-group" style="width: 18rem;">
+            <span class="input-group-text" id="fromdata">Data inizio:</span>
+            <input type="date" class="form-control" id="datepicker_from" name="from_date" required>
+        </div>
+        <div class="col-md-4 input-group" style="width: 18rem;">
+            <span class="input-group-text" id="todata">Data fine:</span>
+            <input type="date" class="form-control" id="datepicker_to" name="to_date" required>
+        </div>
+        <div class="col-12 input-group">
+            <span class="input-group-text" id="descrizione">Descrizione:</span>
+            <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+        </div>
+        <div class="col-md-4 input-group " style="width: 25rem;">
+            <span class="input-group-text" id="intero">Costo ticket intero:</span>
+            <input type="number" class="form-control" id="ticket_Intero_cost" name="ticket_Intero_cost" step="0.01"
+                required>
+        </div>
+        <div class="col-md-4 input-group " style="width: 25rem;">
+            <span class="input-group-text" id="ridotto">Costo ticket ridotto:</span>
+            <input type="number" class="form-control" id="ticket_Ridotto_cost" name="ticket_Ridotto_cost" step="0.01"
+                required>
+        </div>
+        <div class="col-md-4 input-group " style="width: 25rem;">
+            <span class="input-group-text" id="gruppi">Costo ticket gruppi:</span>
+            <input type="number" class="form-control" id="ticket_Gruppo_cost" name="ticket_Gruppo_cost" step="0.01"
+                required>
+        </div>
+        <div class="col-12">
+            <label for=image class="form-label">Immagine copertina evento</label>
+            <input type="file" class="form-control" id="image" name="image" required>
+        </div>
+        <div class="col-md-4 input-group " style="width: 25rem;">
+            <span class="input-group-text" id="Biglietti disponibili">Biglietti disponibili:</span>
+            <input type="number" class="form-control" id="ticket_available" name="ticket_available" required>
+        </div>
 
-    <div class="col-4 input-group" style="width: 40rem;">
-        <span class="input-group-text" id="tag_selection">Tags:</span>
-        <select class="form-select" id="tags" name="tags" required multiple>
-            {% for tag in tags %}
-            <option value="{{ tag.id }}">{{ tag.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="col-4">
-        <span class="input-group-text" id="status">Stato:</span>
-        <select class="form-control" id="published" name="published" required>
-            <option value="published">Pubblicato</option>
-            <option value="draft">Non Pubblicato</option>
-        </select>
-    </div>
-    <div class="col-12">
-        <button id="submit" type="submit" class="btn btn-primary">Crea evento</button>
-    </div>
-</form>
+        <div class="col-4 input-group" style="width: 40rem;">
+            <span class="input-group-text" id="tag_selection">Tags:</span>
+            <select class="form-select" id="tags" name="tags" required multiple>
+                {% for tag in tags %}
+                <option value="{{ tag.id }}">{{ tag.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-4">
+            <span class="input-group-text" id="status">Stato:</span>
+            <select class="form-control" id="published" name="published" required>
+                <option value="published">Pubblicato</option>
+                <option value="draft">Non Pubblicato</option>
+            </select>
+        </div>
+        <div class="col-12">
+            <button id="submit" type="submit" class="btn btn-primary">Crea evento</button>
+        </div>
+    </form>
 
-{% endblock %}
-{% block extrascripts %}
-<script>
-    $(function () {
-        $("#from_date").datepicker({ dateFormat: 'dd-mm-yy' }).val();
-        $("#to_date").datepicker({ dateFormat: 'dd-mm-yy' }).val();
-    });
-</script>
-{% endblock %}
+    {% endblock %}
+    {% block extrascripts %}
+    <script>
+        $(function () {
+            $("#from_date").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+            $("#to_date").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+        });
+    </script>
+    {% endblock %}
