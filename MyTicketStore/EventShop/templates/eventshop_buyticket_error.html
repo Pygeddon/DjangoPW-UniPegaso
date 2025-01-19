@@ -1,0 +1,5 @@
+{% extends "base.html" %} {% block title %} My Ticket Store {% endblock %} {% block content %}
+<h1>Error Page</h1>
+<a href="{% url 'event_store:EventStoreHome' %}">Back to the Event Store</a>
+<p>There was an error in the purchase process. Please try again.</p>
+{% endblock %} {% block extrascripts %} {% endblock %}

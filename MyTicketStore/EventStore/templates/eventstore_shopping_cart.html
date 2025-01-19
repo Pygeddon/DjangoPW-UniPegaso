@@ -1,0 +1,25 @@
+{% extends "base.html" %}{% block title %}{{ block.super }}- Il tuo carrello
+{%endblock %}{% block content %}
+
+<h1>Shopping Cart</h1>
+{% for order in orders %}
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Evento acquistato</th>
+        <th scope="col">Data evento</th>
+        <th scope="col">Biglietti acquistati</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="order" aria-label="Order">
+        <td>{{ order.event.name }}</td>
+        <td>{{ order.date }}</td>
+        <td>Interi: {{ order.num_tickets_interi }} Ridotti: {{ order.num_tickets_ridotti }}
+          Gruppi: {{ order.num_tickets_gruppi }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endfor %} {% endblock %}

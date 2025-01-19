@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %} Crea Evento {% endblock %}
+{% block content %}
+
+{% if form.success %}
+<div class="alert alert-success" role="alert">
+    {{ form.success }}
+</div>
+{% endif %}
+
+{% if form.error %}
+<div class="alert alert-danger" role="alert">
+    {{ form.error }}
+</div>
+{% endif %}
+<form class="row g-3 mt-3" method="POST" novalidate>
+    {% csrf_token %}
+    <div class="col-md-6 input-group" style="width: 18rem;">
+        <span class="input-group-text" id="fromdata">Data inizio:</span>
+        <input type="date" class="form-control" id="datepicker_from" name="from_date" required>
+    </div>
+    <div class="col-md-6 input-group" style="width: 18rem;">
+        <span class="input-group-text" id="todata">Data fine:</span>
+        <input type="date" class="form-control" id="datepicker_to" name="to_date" required>
+    </div>
+
+    <div class="col-md-12 input-group " style="width: 25rem;">
+        <span class="input-group-text" id="Biglietti disponibili">Biglietti disponibili:</span>
+        <input type="number" class="form-control" id="tickets_available" name="tickets_available" step="1" required>
+    </div>
+
+    <div class="col-12">
+        <button id="submit" type="submit" class="btn btn-primary">Aggiungi Datea all'evento</button>
+    </div>
+</form>
+
+{% endblock %}
+{% block extrascripts %}
+<script>
+    $(function () {
+        $("#from_date").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+        $("#to_date").datepicker({ dateFormat: 'dd-mm-yy' }).val();
+    });
+</script>
+{% endblock %}

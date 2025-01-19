@@ -1,0 +1,62 @@
+{% extends 'base.html' %}{% block title %} Dettagli Evento {% endblock %}
+
+{% block content %}
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card shadow-sm p-3 mb-5 bg-body rounded">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">{{ event.name }}</h5>
+                    <img src="{{ event.image.url }}" class="card-img-top shadow-sm" alt="{{ event.title }}">
+                    <p class="card-text fw-bold bg-warning p-1">Descrizione evento:</p>
+                    <p class="card-text">{{ event.description }}</p>
+                    <p class="card-text bg-warning fw-bold p-1">Location:</p>
+                    <p class="card-text">{{ event.location }}</p>
+
+                    <div class="form-group">
+                        <label for="date" class="fw-bold">Seleziona una data:</label>
+                        <select class="form-control" id="date_selector">
+                            {% for date in dates %}
+                            <option value="{{ date }}">{{ date.date }} - Disponibili ancora {{ date.tickets_available }}
+                                biglietti</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" id="buy_a_date" class="btn btn-primary mt-3">Acquista</button>
+                        <div class="toast">
+                            <div class="toast-header">
+                                Acquisto biglietto:
+                            </div>
+                            <div class="toast-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extrascripts %}
+<script>
+    $(document).ready(function () {
+        $('select').on("change", function () {
+            var date = $('#date_selector').val();
+            var event = '{{ event.name }}';
+            if (date) {
+                $('.toast').toast({ delay: 5000 });
+                $('.toast').toast('show');
+                $('.toast-body').html("Stai acquistando un biglietto per l'evento: " + event + " il " + date + ".");
+
+            }
+        });
+        $('#buy_a_date').click(function () {
+            var date = $('#date_selector').val();
+            var event = '{{ event.name }}';
+            console.log(event, date);
+            var event_id = '{{ event.id }}';
+            window.location = "{% url 'event_shop:EventShopBuyTicket'%}" + "?event_id=" + event_id + "&date=" + date;
+        });
+    });
+</script>
+{% endblock %}

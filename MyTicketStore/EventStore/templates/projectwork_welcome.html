@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to MyTicketStore</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Welcome to MyTicketStore</h1>
+    <p>
+        This is the project work for the course "Event Sourcing and CQRS with Python".
+    </p>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2>About the Project</h2>
+                <p class="lead">This project demonstrates the implementation of Event Sourcing and CQRS patterns using
+                    Python.</p>
+
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h3>Event Sourcing</h3>
+                <p>Event Sourcing ensures that all changes to application state are stored as a sequence of events. This
+                    allows for better traceability and auditability.</p>
+            </div>
+            <div class="col-md-6">
+                <h3>CQRS</h3>
+                <p>Command Query Responsibility Segregation (CQRS) separates the read and write operations, allowing for
+                    more scalable and maintainable code.</p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12 text-center">
+                <a href="{% url 'event_store:EventStoreHome' %}" class="btn btn-primary">Accedi</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

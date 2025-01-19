@@ -1,0 +1,28 @@
+{% extends "base.html" %}{% block title %}{{ block.super }}- I tuoi ordini
+{%endblock %}{% block content %}
+
+<h1>I tuoi ordini:</h1>
+{% for order in orders %}
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead class="table-dark"></thead>
+    <tr>
+      <th class="col-4">Evento</th>
+      <th class="col">Data</th>
+      <th class="col">Numero di biglietti</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr class="order" aria-label="Order">
+        <td class=" col-4 ">{{ order.event.name }}</td>
+        <td>{{ order.date }}</td>
+        <td>
+          <span class="badge bg-primary">Interi: {{ order.num_tickets_interi }}</span>
+          <span class="badge bg-secondary">Ridotti: {{ order.num_tickets_ridotti }}</span>
+          <span class="badge bg-success">Gruppi: {{ order.num_tickets_gruppi }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endfor %} {% endblock %}

@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="d-flex flex-row-reverse sticky-top p-2 me-2">
+    <a class="btn btn-success me-1" href="{% url 'event_manager:EventManagerCreateEvent' %}">Crea evento</a>
+
+    <a class="btn btn-success me-1" href="#events">Eventi</a>
+    <a class="btn btn-success me-1" href="#order_completed">Ordini</a>
+    <a class="btn btn-success me-1" href="{% url 'event_store:EventStoreHome' %}">Homepage</a>
+</div>
+<div class="row">
+    <div class="col-12">
+        <p class="fs-2 text-center text-primary">Seleziona evento per la modifica:</p>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-striped table-hover" id="events">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id Evento</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Slug</th>
+                                <th scope="col">Luogo</th>
+                                <th scope="col">Tags</th>
+                                <th scope="col">Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for event in events %}
+                            <tr>
+                                <td>{{ event.id }}</td>
+                                <td>{{ event.name }}</td>
+                                <td>{{ event.slug }}</td>
+                                <td>{{ event.location }}</td>
+                                <td>
+                                    {% for tag in event.tags.all %}
+                                    <span class="badge" style="background-color: rgb(250, 12, 178);">
+                                        {{ tag.name }}</span>
+                                    {% endfor %}
+                                <td>
+                                    <a class="btn btn-warning btn-sm"
+                                        href="{% url 'event_manager:EventManagerAddDatesToEvent' event.id %}">Aggiungi
+                                        Date
+                                    </a>
+                                    <a class="btn btn-primary btn-sm"
+                                        href="{% url 'event_manager:EventManagerModifyEvent' event.id %}">Modifica</a>
+                                    <a class="btn btn-danger btn-sm" id="id_{{ event.id }}"
+                                        onclick="Delete_event('{{ event.id }}')"
+                                        href="{% url 'event_manager:EventManagerDeleteEvent' event.id %}">Cancella</a>
+                                    <a class="btn btn-info btn-sm"
+                                        href="{% url 'event_store:EventStoreEventDetail' event.id %}">Visualizza</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+<br>
+<div class="row">
+    <div class="col-12">
+        <p class="fs-2 text-center text-warning"> Seleziona Ordine per la modifica:</p>
+        <div class="container"></div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row m-2 fs-5" id="order_completed">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID Ordine</th>
+                                <th scope="col">Creato il</th>
+                                <th scope="col">Utente</th>
+                                <th scope="col">Evento</th>
+                                <th scope="col">Biglietti Acquistati</th>
+                                <th scope="col">Totale €</th>
+                                <th scope="col">Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in order_completed %}
+                            <tr>
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.created }}</td>
+                                <td>{{ order.user }}</td>
+                                <td>{{ order.event }}</td>
+                                <td><span class="badge bg-primary">Interi: {{ order.num_tickets_interi }}</span>
+                                    <span class="badge bg-secondary">Ridotti: {{ order.num_tickets_ridotti }}</span>
+                                    <span class="badge bg-success">Gruppi: {{ order.num_tickets_gruppi }}</span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm"
+                                        href="{% url 'event_manager:EventManagerModifyOrder' order.id %}">Modifica
+                                        ordine</a>
+                                    <a class="btn btn-danger btn-sm" id="delete_order"
+                                        onclick="Delete_order('{{ order.id }}')"
+                                        href="{% url 'event_manager:EventManagerDeleteOrder' order.id %}">Cancella
+                                        ordine</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extrascripts %}
+<script>
+    function Delete_event(id) {
+        var r = confirm("Sei sicuro di voler cancellare l'evento?");
+        if (r == true) {
+            window.location.href = document.getElementById(event.target.id).href;
+        } else {
+            return false;
+        }
+    }
+    function Delete_order(id) {
+        var r = confirm("Sei sicuro di voler cancellare l'ordine?");
+        if (r == true) {
+            window.location.href = document.getElementById(event.target.id).href;
+        } else {
+            return false;
+        }
+    }
+
+</script>
+{% endblock %}

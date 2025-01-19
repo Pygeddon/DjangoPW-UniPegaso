@@ -1,0 +1,62 @@
+{% extends 'base.html' %}{% block title %} Dettagli Evento {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class=" mb-3">
+            <div class="card my-3">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Stai Acquistando l'evento: {{ event.name }} </h5>
+                    <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.title }}" style="width: 50vw;">
+                    <p class="card-text fw-bold">{{ event.location }}</p>
+                    <p class="card-text fw-bold">Data: {{ date }}</p>
+                    <form method="post" action="{% url 'event_shop:EventShopBuyTicketStep2' %}" id="form_tickets">
+                        {% csrf_token %}
+                        <input type="hidden" name="event_id" value="{{ event.id }}">
+                        <input type="hidden" name="date" value="{{ date }}">
+                        <div class="form-group"></div>
+                        <label for="num_tickets_interi" class="fw-bold">Numero di Biglietti Interi:</label>
+                        <select class="form-control" id="num_tickets_interi" name="num_tickets_interi"
+                            form="form_tickets">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <label for="num_tickets_ridotti" class="fw-bold">Numero di Biglietti Ridotti:</label>
+                        <select class="form-control" id="num_tickets_ridotti" name="num_tickets_ridotti">
+                            <option value="0" selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <label for="num_tickets_gruppi" class="fw-bold">Numero di Biglietti per Gruppo:</label>
+                        <p class="text-muted">I biglietti sono disponibili solo per gruppi di minimo 5 persone.
+                        </p>
+                        <input type="number" class="form-control" id="num_tickets_gruppi" name="num_tickets_gruppi"
+                            value="0" placeholder="0">
+                </div>
+                <button type="submit" id="step2" class="btn btn-primary mt-3">Conferma</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+{% block extrascripts %}
+<script>
+    document.getElementById('form_tickets').addEventListener('submit', function (event) {
+        var numTicketsGruppi = document.getElementById('num_tickets_gruppi').value;
+        if (numTicketsGruppi > 0 && numTicketsGruppi < 5) {
+            event.preventDefault();
+            alert('Il numero di biglietti per gruppo deve essere almeno 5.');
+        }
+    });
+</script>
+{% endblock %}

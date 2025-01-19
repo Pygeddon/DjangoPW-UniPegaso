@@ -1,0 +1,50 @@
+{% extends 'base.html' %}{% block title %}{{ block.super }}::Pagamento {% endblock %}
+{% block content %}
+<h1>Pagamento</h1>
+<div class="card">
+    <div class="card-header">
+        Riepilogo Pagamento
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ event.name }}</h5>
+        <p class="card-text">Biglietti per la data del: {{ date }}</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Quantità</th>
+                    <th scope="col">Prezzo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Intero</td>
+                    <td>{{ tickets.interi }}</td>
+                    <td>{{ event.ticket_Intero_cost }} €</td>
+                </tr>
+                <tr>
+                    <td>Ridotto</td>
+                    <td>{{ tickets.ridotti }}</td>
+                    <td>{{ event.ticket_Ridotto_cost }} €</td>
+                </tr>
+                <tr>
+                    <td>Gruppi</td>
+                    <td>{{ tickets.gruppi }}</td>
+                    <td>{{ event.ticket_Gruppo_cost }} €</td>
+                </tr>
+                <tr>
+                    <td>Totale</td>
+                    <td>{{ tickets.gruppi }}</td>
+                    <td>{{ tickets.totale }}</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <a href="{% url 'event_shop:EventShopCreateOrder' %}" class="btn btn-primary">Procedi al Pagamento</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extrascripts %}
+
+{% endblock %}

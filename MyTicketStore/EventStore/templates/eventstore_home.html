@@ -1,0 +1,140 @@
+{% extends "base.html" %} {% block title %} My Ticket Store {% endblock %} {% block content %}
+
+
+
+<section name="hero">
+  <div class="px-1 py-3 my-3 text-center">
+    <i class="fa-solid fa-ticket fa-rotate-by fa-5x" style="color: rgb(252, 178, 67); --fa-rotate-angle: 160deg;"></i>
+    <h1 class="display-5 fw-bold">Trova il tuo prossimo evento!</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">Questo sito è stato sviluppato come Project-Work per l'universita UniPegaso. </p>
+      <p class="muted">Realizzato da Roberto Fustinoni.</p>
+    </div>
+  </div>
+</section>
+<section name="Tags" id="tags">
+  <div class="container">
+    {% for tag in tags %}
+    <span class="badge badge-pill badge-primary" style="background-color: #fa0cb2;">
+      <a class="text-decoration-none text-reset" href="{% url 'event_store:EventStoreListByTag' tag.slug %}">
+        {{ tag.name }}
+      </a>
+    </span>
+
+    {% endfor %}
+</section>
+
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row">
+      <div class="card-group">
+        {% for event in events %}
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <a href="{% url 'event_store:EventStoreEventDetail' event.id %}"><img class="card-img-top rounded-top"
+                src="{{ event.image.url }}" alt="Card image cap" width="362px;" height="250px;"> </a>
+            <div class="card-body">
+              <h5 class="card-title">{{ event.name }}</h5>
+              {% for tag in event.tags.all %}
+              <h5 class="badge" style="background-color: #fa0cb2;">
+                {{ tag.name }}</h5>
+              {% endfor %}
+              <h6 class="card-text"><i class="fa fa-location-arrow" aria-hidden="true"> </i> {{ event.location }}</h6>
+              {% if event.last_date != event.first_date %}
+              <p class="card-text">Dal: {{ event.first_date }} - Al: {{ event.last_date }}</p>
+              {% endif %}
+              {% if event.last_date == event.first_date %}
+              <p>Il {{ event.first_date }}</p>
+              {% endif %}
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{% url 'event_store:EventStoreEventDetail' event.id %}" class="btn btn-warning"
+                    data-bs-toggle="tooltip" data-bs-html="true" title="scegli la data">Trova
+                    date</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">Inserito il: {{ event.created|date:"d M Y" }}</small>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container px-4 py-5" id="featured-3">
+  <h2 class="pb-2 border-bottom">Altro dal sito</h2>
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="feature col">
+      <div class="feature-icon bg-warning bg-gradient">
+        <i class="fa fa-building"></i>
+      </div>
+      <h2>Informazioni utili</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard
+        dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+        specimen
+        book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+        essentially
+        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more
+        recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      <a href="#" class="icon-link">
+        Call to action
+        <svg class="bi" width="1em" height="1em">
+          <use xlink:href="#chevron-right" />
+        </svg>
+      </a>
+    </div>
+    <div class="feature col">
+      <div class="feature-icon bg-warning bg-gradient">
+        <i class="fa fa-building"></i>
+      </div>
+      <h2>Come contattarci</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard
+        dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+        specimen
+        book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+        essentially
+        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more
+        recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      <a href="#" class="icon-link">
+        Call to action
+        <svg class="bi" width="1em" height="1em">
+          <use xlink:href="#chevron-right" />
+        </svg>
+      </a>
+    </div>
+    <div class="feature col">
+      <div class="feature-icon bg-warning bg-gradient">
+        <i class="fa fa-building"></i>
+      </div>
+      <h2>Richiesta tour personali</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard
+        dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+        specimen
+        book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+        essentially
+        unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+        and more
+        recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      <a href="#" class="icon-link">
+        Call to action
+        <svg class="bi" width="1em" height="1em">
+          <use xlink:href="#chevron-right" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block extrascripts %} {% endblock %}
